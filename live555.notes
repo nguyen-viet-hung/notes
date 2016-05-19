@@ -1,0 +1,4 @@
+#everything about live555
+
+[2016-05-19 - 10:47:15]
+In linux, order of link library for live555 is -lliveMedia -lgroupsock -lUsageEnvironment -lBasicUsageEnvironment
