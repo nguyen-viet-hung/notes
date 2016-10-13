@@ -84,3 +84,11 @@ do as follow:
 # /sbin/mdadm.moved --stop --scan
 # mv /sbin/mdadm.moved /sbin/mdadm
 # mdadm --zero-superblock /dev/sdb1
+
+#Auto mount devices at startup
+
+Add a line into /etc/fstab as below
+
+path_to_device   mount_point   partition_format defaults 0 0
+
+if path_to_device is connect via net (e.x. storage), we have to change "defaults" to "_netdev". This way the mount point will be mounted only after the network start correctly.
