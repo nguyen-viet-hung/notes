@@ -1,4 +1,4 @@
-#Note về fork và pipe (chỉ dành cho Linux)
+# Note về fork và pipe (chỉ dành cho Linux)
 
 fork dùng để tạo ra một process con từ process cha. Khi gọi lệnh này, process con sẽ được copy vùng nhớ như của process cha và được thực hiện tiếp từ điểm gọi lệnh fork.
 Một điểm lưu ý: Mặc dù process chả là multi-thread, nhưng sau khi thực hiện lệnh fork, process con được tạo ra chỉ là single thread và thread chính của process con lúc này giống như thread ở process cha thực hiện lệnh fork.

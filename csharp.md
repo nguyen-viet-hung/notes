@@ -1,4 +1,4 @@
-Notes về C# trên Linux
+# Notes về CSharp trên Linux
 
 Lệnh:
 

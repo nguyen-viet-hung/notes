@@ -1,0 +1,121 @@
+# ISCSI
+ 	
+Configure iSCSI Initiator.
+This example is based on the environment below.
+
++----------------------+          |          +----------------------+
+| [   iSCSI Target   ] |10.0.0.30 | 10.0.0.31| [ iSCSI Initiator  ] |
+|     dlp.srv.world    +----------+----------+     www.srv.world    |
+|                      |                     |                      |
++----------------------+                     +----------------------+
+
+[1] 	Configure iSCSI Initiator.
+[root@www ~]# yum -y install iscsi-initiator-utils
+[root@www ~]# vi /etc/iscsi/initiatorname.iscsi
+# change to the same IQN you set on the iSCSI target server
+
+InitiatorName=iqn.2014-07.world.srv:www.srv.world
+[root@www ~]# vi /etc/iscsi/iscsid.conf
+# line 57: uncomment
+
+node.session.auth.authmethod = CHAP
+# line 61,62: uncomment and specify the username and password you set on the iSCSI target server
+
+node.session.auth.username = username
+
+node.session.auth.password = password
+# discover target
+
+[root@www ~]# iscsiadm -m discovery -t sendtargets -p 10.0.0.30
+
+[  635.510656] iscsi: registered transport (tcp)
+10.0.0.30:3260,1 iqn.2014-07.world.srv:storage.target00
+
+# confirm status after discovery
+
+[root@www ~]# iscsiadm -m node -o show
+
+# BEGIN RECORD 6.2.0.873-21
+node.name = iqn.2014-07.world.srv:storage.target00
+node.tpgt = 1
+node.startup = automatic
+node.leading_login = No
+...
+...
+...
+node.conn[0].iscsi.IFMarker = No
+node.conn[0].iscsi.OFMarker = No
+# END RECORD
+
+# login to the target
+
+[root@www ~]# iscsiadm -m node --login
+
+Logging in to [iface: default, target: iqn.2014-07.world.srv:storage.target00, portal: 10.0.0.30,3260] (multiple)
+[  708.383308] scsi2 : iSCSI Initiator over TCP/IP
+[  709.393277] scsi 2:0:0:0: Direct-Access     LIO-ORG  disk01           4.0  PQ: 0 ANSI: 5
+[  709.395709] scsi 2:0:0:0: alua: supports implicit and explicit TPGS
+[  709.398155] scsi 2:0:0:0: alua: port group 00 rel port 01
+[  709.399762] scsi 2:0:0:0: alua: port group 00 state A non-preferred supports TOlUSNA
+[  709.401763] scsi 2:0:0:0: alua: Attached
+[  709.402910] scsi 2:0:0:0: Attached scsi generic sg0 type 0
+Login to [iface: default, target: iqn.2014-07.world.srv:storage.target00, portal: 10.0.0.30,3260] successful.
+
+# confirm the established session
+
+[root@www ~]# iscsiadm -m session -o show
+
+tcp: [1] 10.0.0.30:3260,1 iqn.2014-07.world.srv:storage.target00 (non-flash)
+# confirm the partitions
+
+[root@www ~]# cat /proc/partitions
+
+major minor  #blocks  name
+
+ 252        0   52428800 sda
+ 252        1     512000 sda1
+ 252        2   51915776 sda2
+ 253        0    4079616 dm-0
+ 253        1   47833088 dm-1
+   8        0   20971520 sdb
+
+# added new device provided from the target server as "sdb"
+[2] 	After setting iSCSI devide, configure on Initiator to use it like follwos.
+# create label
+
+[root@www ~]# parted --script /dev/sdb "mklabel msdos"
+
+# create partiton
+
+[root@www ~]# parted --script /dev/sdb "mkpart primary 0% 100%"
+
+# format with XFS
+
+[root@www ~]# mkfs.xfs -i size=1024 -s size=4096 /dev/sdb1
+
+meta-data=/dev/sdb1        isize=1024   agcount=16, agsize=327616 blks
+         =                 sectsz=4096  attr=2, projid32bit=1
+         =                 crc=0
+data     =                 bsize=4096   blocks=5241856, imaxpct=25
+         =                 sunit=0      swidth=0 blks
+naming   =version 2        bsize=4096   ascii-ci=0 ftype=0
+log      =internal log     bsize=4096   blocks=2560, version=2
+         =                 sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none             extsz=4096   blocks=0, rtextents=0
+
+# mount it
+
+[root@www ~]# mount /dev/sdb1 /mnt
+
+[ 6894.010661] XFS (sdb1): Mounting Filesystem
+[ 6894.031358] XFS (sdb1): Ending clean mount
+[root@www ~]# df -hT
+
+Filesystem              Type      Size  Used Avail Use% Mounted on
+/dev/mapper/centos-root xfs        46G 1023M   45G   3% /
+devtmpfs                devtmpfs  1.9G     0  1.9G   0% /dev
+tmpfs                   tmpfs     1.9G     0  1.9G   0% /dev/shm
+tmpfs                   tmpfs     1.9G  8.3M  1.9G   1% /run
+tmpfs                   tmpfs     1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sda1               xfs       497M  120M  378M  25% /boot
+/dev/sdb1               xfs        20G   33M   20G   1% /mnt
