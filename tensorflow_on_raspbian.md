@@ -1,6 +1,7 @@
 # Building TensorFlow for Raspberry Pi: a Step-By-Step Guide
 
 _[Source](https://github.com/samjabrahams/tensorflow-on-raspberry-pi/blob/master/GUIDE.md)_
+
 _Note: I updated the option of bazel for building tensorflow to prevent java OutOfMemory based on setting when build bazel_
 
 ## What You Need
