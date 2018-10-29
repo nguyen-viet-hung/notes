@@ -591,7 +591,7 @@ The Engine.IO server configuration supports the following settings:
 * **cors_credentials** – Whether credentials (cookies, authentication) are allowed in requests to this server. The default is `True`.
 * **engineio_logger** – To enable Engine.IO logging set to `True` or pass a logger object to use. To disable logging set to `False`. The default is `False`.
 
-`on`(_message_, _namespace=None_)
+**`on`**(_message_, _namespace=None_)
 
 Decorator to register a SocketIO event handler.
 
@@ -603,10 +603,11 @@ This decorator must be applied to SocketIO event handlers. Example:
         print('received json: ' + str(json))
     
 
-	**Parameters:**	* **message** – The name of the event. This is normally a user defined string, but a few event names are already defined. Use `'message'` to define a handler that takes a string payload, `'json'` to define a handler that takes a JSON blob payload, `'connect'` or `'disconnect'` to create handlers for connection and disconnection events.
-	* **namespace** – The namespace on which the handler is to be registered. Defaults to the global namespace.
+**Parameters:**	
+* **message** – The name of the event. This is normally a user defined string, but a few event names are already defined. Use `'message'` to define a handler that takes a string payload, `'json'` to define a handler that takes a JSON blob payload, `'connect'` or `'disconnect'` to create handlers for connection and disconnection events.
+* **namespace** – The namespace on which the handler is to be registered. Defaults to the global namespace.
 
-`**on_error**`(_namespace=None_)
+**`on_error`**(_namespace=None_)
 
 Decorator to define a custom error handler for SocketIO events.
 
@@ -620,7 +621,7 @@ This decorator can be applied to a function that acts as an error handler for a 
 
 	**Parameters:** **namespace** – The namespace for which to register the error handler. Defaults to the global namespace.
 
-`**on_error_default**`(_exception_handler_)
+**`on_error_default`**(_exception_handler_)
 
 Decorator to define a default error handler for SocketIO events.
 
@@ -632,8 +633,7 @@ This decorator can be applied to a function that acts as a default error handler
         print('An error has occurred: ' + str(e))
     
 
-`**on_event**`(_message_, _handler_, _namespace=None_)
-: 
+**`on_event`**(_message_, _handler_, _namespace=None_) 
 
 Register a SocketIO event handler.
 
@@ -648,16 +648,13 @@ Example:
     socketio.on_event('my event', on_foo_event, namespace='/chat')
     
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **message** – The name of the event. This is normally a user defined string, but a few event names are already defined. Use `'message'` to define a handler that takes a string payload, `'json'` to define a handler that takes a JSON blob payload, `'connect'` or `'disconnect'` to create handlers for connection and disconnection events.
 * **handler** – The function that handles the event.
 * **namespace** – The namespace on which the handler is to be registered. Defaults to the global namespace.
- | 
 
-`emit`(_event_, _*args_, _**kwargs_)
-: 
+**`emit`**(_event_, _*args_, _**kwargs_) 
 
 Emit a server generated SocketIO event.
 
@@ -669,8 +666,7 @@ This function emits a SocketIO event to one or more connected clients. A JSON bl
         socketio.emit('ping event', {'data': 42}, namespace='/chat')
     
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **event** – The name of the user event to emit.
 * **args** – A dictionary with the JSON data to send as payload.
@@ -678,17 +674,14 @@ This function emits a SocketIO event to one or more connected clients. A JSON bl
 * **room** – Send the message to all the users in the given room. If this parameter is not included, the event is sent to all connected users.
 * **skip_sid** – The session id of a client to ignore when broadcasting or addressing a room. This is typically set to the originator of the message, so that everyone except that client receive the message.
 * **callback** – If given, this function will be called to acknowledge that the client has received the message. The arguments that will be passed to the function are those provided by the client. Callback functions can only be used when addressing an individual client.
- | 
 
-`send`(_data_, _json=False_, _namespace=None_, _room=None_, _callback=None_, _include_self=True_, _skip_sid=None_, _**kwargs_)
-: 
+**`send`**(_data_, _json=False_, _namespace=None_, _room=None_, _callback=None_, _include_self=True_, _skip_sid=None_, _**kwargs_)
 
 Send a server-generated SocketIO message.
 
 This function sends a simple SocketIO message to one or more connected clients. The message can be a string or a JSON blob. This is a simpler version of `emit()`, which should be preferred. This function can be used outside of a SocketIO event context, so it is appropriate to use when the server is the originator of an event.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **data** – The message to send, either a string or a JSON blob.
 * **json** – `True` if `message` is a JSON blob, `False` otherwise.
@@ -696,29 +689,23 @@ This function sends a simple SocketIO message to one or more connected clients. 
 * **room** – Send the message only to the users in the given room. If this parameter is not included, the message is sent to all connected users.
 * **skip_sid** – The session id of a client to ignore when broadcasting or addressing a room. This is typically set to the originator of the message, so that everyone except that client receive the message.
 * **callback** – If given, this function will be called to acknowledge that the client has received the message. The arguments that will be passed to the function are those provided by the client. Callback functions can only be used when addressing an individual client.
- | 
 
-`close_room`(_room_, _namespace=None_)
-: 
+**`close_room`**(_room_, _namespace=None_)
 
 Close a room.
 
 This function removes any users that are in the given room and then deletes the room from the server. This function can be used outside of a SocketIO event context.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **room** – The name of the room to close.
 * **namespace** – The namespace under which the room exists. Defaults to the global namespace.
- | 
 
-`run`(_app_, _host=None_, _port=None_, _**kwargs_)
-: 
+**`run`**(_app_, _host=None_, _port=None_, _**kwargs_)
 
 Run the SocketIO web server.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **app** – The Flask application instance.
 * **host** – The hostname or IP address for the server to listen on. Defaults to 127.0.0.1.
@@ -728,34 +715,28 @@ Run the SocketIO web server.
 * **extra_files** – A list of additional files that the Flask reloader should watch. Defaults to `None`
 * **log_output** – If `True`, the server logs all incomming connections. If `False` logging is disabled. Defaults to `True` in debug mode, `False` in normal mode. Unused when the threading async mode is used.
 * **kwargs** – Additional web server options. The web server options are specific to the server used in each of the supported async modes. Note that options provided here will not be seen when using an external web server such as gunicorn, since this method is not called in that case.
- | 
 
-`stop`()
-: 
+**`stop`**()
 
 Stop a running SocketIO web server.
 
 This method must be called from a HTTP or SocketIO handler function.
 
-`start_background_task`(_target_, _*args_, _**kwargs_)
-: 
+**`start_background_task`**(_target_, _*args_, _**kwargs_) 
 
 Start a background task using the appropriate async model.
 
 This is a utility function that applications can use to start a background task using the method that is compatible with the selected async mode.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **target** – the target function to execute.
 * **args** – arguments to pass to the function.
 * **kwargs** – keyword arguments to pass to the function.
- | 
 
 This function returns an object compatible with the Thread class in the Python standard library. The start() method on this object is already called by this function.
 
-`sleep`(_seconds=0_)
-: 
+**`sleep`**(_seconds=0_)
 
 Sleep for the requested amount of time using the appropriate async model.
 
@@ -779,8 +760,7 @@ This function emits a SocketIO event to one or more connected clients. A JSON bl
         emit('my response', {'data': 42})
     
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **event** – The name of the user event to emit.
 * **args** – A dictionary with the JSON data to send as payload.
@@ -790,17 +770,14 @@ This function emits a SocketIO event to one or more connected clients. A JSON bl
 * **room** – Send the message to all the users in the given room. If this argument is set, then broadcast is implied to be `True`.
 * **include_self** – `True` to include the sender when broadcasting or addressing a room, or `False` to send to everyone but the sender.
 * **ignore_queue** – Only used when a message queue is configured. If set to `True`, the event is emitted to the clients directly, without going through the queue. This is more efficient, but only works when a single server process is used, or when there is a single addresee. It is recommended to always leave this parameter with its default value of `False`.
- | 
 
-`flask_socketio.``send`(_message_, _**kwargs_)
-: 
+`flask_socketio.`**`send`**(_message_, _**kwargs_) 
 
 Send a SocketIO message.
 
 This function sends a simple SocketIO message to one or more connected clients. The message can be a string or a JSON blob. This is a simpler version of `emit()`, which should be preferred. This is a function that can only be called from a SocketIO event handler.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **message** – The message to send, either a string or a JSON blob.
 * **json** – `True` if `message` is a JSON blob, `False` otherwise.
@@ -810,10 +787,8 @@ This function sends a simple SocketIO message to one or more connected clients. 
 * **room** – Send the message to all the users in the given room.
 * **include_self** – `True` to include the sender when broadcasting or addressing a room, or `False` to send to everyone but the sender.
 * **ignore_queue** – Only used when a message queue is configured. If set to `True`, the event is emitted to the clients directly, without going through the queue. This is more efficient, but only works when a single server process is used, or when there is a single addresee. It is recommended to always leave this parameter with its default value of `False`.
- | 
 
-`flask_socketio.``join_room`(_room_, _sid=None_, _namespace=None_)
-: 
+`flask_socketio.`**`join_room`**(_room_, _sid=None_, _namespace=None_)
 
 Join a room.
 
@@ -828,16 +803,13 @@ This function puts the user in a room, under the current namespace. The user and
         send(username + ' has entered the room.', room=room)
     
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **room** – The name of the room to join.
 * **sid** – The session id of the client. If not provided, the client is obtained from the request context.
 * **namespace** – The namespace for the room. If not provided, the namespace is obtained from the request context.
- | 
 
-`flask_socketio.``leave_room`(_room_, _sid=None_, _namespace=None_)
-: 
+`flask_socketio.`**`leave_room`**(_room_, _sid=None_, _namespace=None_)
 
 Leave a room.
 
@@ -852,44 +824,35 @@ This function removes the user from a room, under the current namespace. The use
         send(username + ' has left the room.', room=room)
     
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **room** – The name of the room to leave.
 * **sid** – The session id of the client. If not provided, the client is obtained from the request context.
 * **namespace** – The namespace for the room. If not provided, the namespace is obtained from the request context.
- | 
 
-`flask_socketio.``close_room`(_room_, _namespace=None_)
-: 
+`flask_socketio.`**`close_room`**(_room_, _namespace=None_)
 
 Close a room.
 
 This function removes any users that are in the given room and then deletes the room from the server.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **room** – The name of the room to close.
 * **namespace** – The namespace for the room. If not provided, the namespace is obtained from the request context.
- | 
 
-`flask_socketio.``rooms`(_sid=None_, _namespace=None_)
-: 
+`flask_socketio.`**`rooms`**(_sid=None_, _namespace=None_) 
 
 Return a list of the rooms the client is in.
 
 This function returns all the rooms the client has entered, including its own room, assigned by the Socket.IO server.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **sid** – The session id of the client. If not provided, the client is obtained from the request context.
 * **namespace** – The namespace for the room. If not provided, the namespace is obtained from the request context.
- | 
 
-`flask_socketio.``disconnect`(_sid=None_, _namespace=None_, _silent=False_)
-: 
+`flask_socketio.`**`disconnect`**(_sid=None_, _namespace=None_, _silent=False_) 
 
 Disconnect the client.
 
@@ -904,84 +867,68 @@ This function terminates the connection with the client. As a result of this cal
             # ...
     
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **sid** – The session id of the client. If not provided, the client is obtained from the request context.
 * **namespace** – The namespace for the room. If not provided, the namespace is obtained from the request context.
 * **silent** – this option is deprecated.
- | 
 
-_class _`flask_socketio.``Namespace`(_namespace=None_)
-: 
+*class* `flask_socketio.`**`Namespace`**(_namespace=None_) 
 
-`trigger_event`(_event_, _*args_)
-: 
+**`trigger_event`**(_event_, _*args_) 
 
-Dispatch an event to the proper handler method.
+> Dispatch an event to the proper handler method.
 
-In the most common usage, this method is not overloaded by subclasses, as it performs the routing of events to methods. However, this method can be overriden if special dispatching rules are needed, or if having a single method that catches all events is desired.
+> In the most common usage, this method is not overloaded by subclasses, as it performs the routing of events to methods. However, this method can be overriden if special dispatching rules are needed, or if having a single method that catches all events is desired.
 
-`emit`(_event_, _data=None_, _room=None_, _include_self=True_, _namespace=None_, _callback=None_)
-: 
+**`emit`**(_event_, _data=None_, _room=None_, _include_self=True_, _namespace=None_, _callback=None_) 
 
-Emit a custom event to one or more connected clients.
+> Emit a custom event to one or more connected clients.
 
-`send`(_data_, _room=None_, _include_self=True_, _namespace=None_, _callback=None_)
-: 
+**`send`**(_data_, _room=None_, _include_self=True_, _namespace=None_, _callback=None_) 
 
-Send a message to one or more connected clients.
+> Send a message to one or more connected clients.
 
-`close_room`(_room_, _namespace=None_)
-: 
+**`close_room`**(_room_, _namespace=None_) 
 
-Close a room.
+> Close a room.
 
-_class _`flask_socketio.``SocketIOTestClient`(_app_, _socketio_, _namespace=None_, _query_string=None_, _headers=None_)
-: 
+*class* `flask_socketio.`**`SocketIOTestClient`**(_app_, _socketio_, _namespace=None_, _query_string=None_, _headers=None_) 
 
 This class is useful for testing a Flask-SocketIO server. It works in a similar way to the Flask Test Client, but adapted to the Socket.IO server.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **app** – The Flask application instance.
 * **socketio** – The application's `SocketIO` instance.
 * **namespace** – The namespace for the client. If not provided, the client connects to the server on the global namespace.
 * **query_string** – A string with custom query string arguments.
 * **headers** – A dictionary with custom HTTP headers.
- | 
 
-`connect`(_namespace=None_, _query_string=None_, _headers=None_)
-: 
+**`connect`**(_namespace=None_, _query_string=None_, _headers=None_)
 
 Connect the client.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **namespace** – The namespace for the client. If not provided, the client connects to the server on the global namespace.
 * **query_string** – A string with custom query string arguments.
 * **headers** – A dictionary with custom HTTP headers.
- | 
 
 Note that it is usually not necessary to explicitly call this method, since a connection is automatically established when an instance of this class is created. An example where it this method would be useful is when the application accepts multiple namespace connections.
 
-`disconnect`(_namespace=None_)
-: 
+**`disconnect`**(_namespace=None_) 
 
 Disconnect the client.
 
-| ----- |
-| Parameters: | **namespace** – The namespace to disconnect. The global namespace is assumed if this argument is not provided. | 
+**Parameters:**
+* **namespace** – The namespace to disconnect. The global namespace is assumed if this argument is not provided.
 
-`emit`(_event_, _*args_, _**kwargs_)
-: 
+**`emit`**(_event_, _*args_, _**kwargs_) 
 
 Emit an event to the server.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **event** – The event name.
 * ***args** – 
@@ -990,31 +937,26 @@ The event arguments.
 
 * **callback** – `True` if the client requests a callback, `False` if not. Note that client-side callbacks are not implemented, a callback request will just tell the server to provide the arguments to invoke the callback, but no callback is invoked. Instead, the arguments that the server provided for the callback are returned by this function.
 * **namespace** – The namespace of the event. The global namespace is assumed if this argument is not provided.
- | 
 
-`send`(_data_, _json=False_, _callback=False_, _namespace=None_)
-: 
+**`send`**(_data_, _json=False_, _callback=False_, _namespace=None_) 
 
 Send a text or JSON message to the server.
 
-| ----- |
-| Parameters: | 
+**Parameters:**
 
 * **data** – A string, dictionary or list to send to the server.
 * **json** – `True` to send a JSON message, `False` to send a text message.
 * **callback** – `True` if the client requests a callback, `False` if not. Note that client-side callbacks are not implemented, a callback request will just tell the server to provide the arguments to invoke the callback, but no callback is invoked. Instead, the arguments that the server provided for the callback are returned by this function.
 * **namespace** – The namespace of the event. The global namespace is assumed if this argument is not provided.
- | 
 
-`get_received`(_namespace=None_)
-: 
+**`get_received`**(_namespace=None_) 
 
 Return the list of messages received from the server.
 
 Since this is not a real client, any time the server emits an event, the event is simply stored. The test code can invoke this method to obtain the list of events that were received since the last call.
 
-| ----- |
-| Parameters: | **namespace** – The namespace to get events from. The global namespace is assumed if this argument is not provided. | 
+**Parameters:**
+* **namespace** – The namespace to get events from. The global namespace is assumed if this argument is not provided.
 
 [1]: http://socket.io
 [2]: http://eventlet.net/
