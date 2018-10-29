@@ -55,7 +55,13 @@ The command line interface based on click introduced in Flask 0.11 is also suppo
 The application must serve a page to the client that loads the Socket.IO library and establishes a connection:
     
     
-    http://www.google-analytics.com/ga.js"> type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('connect', function() {
+            socket.emit('my event', {data: 'I\'m connected!'});
+    });
+    </script>
     
     
 
@@ -547,54 +553,46 @@ On the server side, there are a few points to consider:
 
 ## API Reference
 
-_class _`flask_socketio.``SocketIO`(_app=None_, _**kwargs_)
-: 
+*class* `flask_socketio.``**SocketIO**`(_app=None_, _**kwargs_) 
 
-Create a Flask-SocketIO server.
+	Create a Flask-SocketIO server.
 
-| ----- |
-| Parameters: | 
+	**Parameters:**
 
-* **app** – The flask application instance. If the application instance isn't known at the time this class is instantiated, then call `socketio.init_app(app)` once the application instance is available.
-* **manage_session** – If set to `True`, this extension manages the user session for Socket.IO events. If set to `False`, Flask's own session management is used. When using Flask's cookie based sessions it is recommended that you leave this set to the default of `True`. When using server-side sessions, a `False` setting enables sharing the user session between HTTP routes and Socket.IO events.
-* **message_queue** – A connection URL for a message queue service the server can use for multi-process communication. A message queue is not required when using a single server process.
-* **channel** – The channel name, when using a message queue. If a channel isn't specified, a default channel will be used. If multiple clusters of SocketIO processes need to use the same message queue without interfering with each other, then each cluster should use a different channel.
-* **path** – The path where the Socket.IO server is exposed. Defaults to `'socket.io'`. Leave this as is unless you know what you are doing.
-* **resource** – Alias to `path`.
-* **kwargs** – Socket.IO and Engine.IO server options.
- | 
+	* **app** – The flask application instance. If the application instance isn't known at the time this class is instantiated, then call `socketio.init_app(app)` once the application instance is available.
+	* **manage_session** – If set to `True`, this extension manages the user session for Socket.IO events. If set to `False`, Flask's own session management is used. When using Flask's cookie based sessions it is recommended that you leave this set to the default of `True`. When using server-side sessions, a `False` setting enables sharing the user session between HTTP routes and Socket.IO events.
+	* **message_queue** – A connection URL for a message queue service the server can use for multi-process communication. A message queue is not required when using a single server process.
+	* **channel** – The channel name, when using a message queue. If a channel isn't specified, a default channel will be used. If multiple clusters of SocketIO processes need to use the same message queue without interfering with each other, then each cluster should use a different channel.
+	* **path** – The path where the Socket.IO server is exposed. Defaults to `'socket.io'`. Leave this as is unless you know what you are doing.
+	* **resource** – Alias to `path`.
+	* **kwargs** – Socket.IO and Engine.IO server options.
 
-The Socket.IO server options are detailed below:
+	The Socket.IO server options are detailed below:
 
-| ----- |
-| Parameters: | 
+	**Parameters:**
 
-* **client_manager** – The client manager instance that will manage the client list. When this is omitted, the client list is stored in an in-memory structure, so the use of multiple connected servers is not possible. In most cases, this argument does not need to be set explicitly.
-* **logger** – To enable logging set to `True` or pass a logger object to use. To disable logging set to `False`. The default is `False`.
-* **binary** – `True` to support binary payloads, `False` to treat all payloads as text. On Python 2, if this is set to `True`, `unicode` values are treated as text, and `str` and `bytes` values are treated as binary. This option has no effect on Python 3, where text and binary payloads are always automatically discovered.
-* **json** – An alternative json module to use for encoding and decoding packets. Custom json modules must have `dumps` and `loads` functions that are compatible with the standard library versions. To use the same json encoder and decoder as a Flask application, use `flask.json`.
- | 
+	* **client_manager** – The client manager instance that will manage the client list. When this is omitted, the client list is stored in an in-memory structure, so the use of multiple connected servers is not possible. In most cases, this argument does not need to be set explicitly.
+	* **logger** – To enable logging set to `True` or pass a logger object to use. To disable logging set to `False`. The default is `False`.
+	* **binary** – `True` to support binary payloads, `False` to treat all payloads as text. On Python 2, if this is set to `True`, `unicode` values are treated as text, and `str` and `bytes` values are treated as binary. This option has no effect on Python 3, where text and binary payloads are always automatically discovered.
+	* **json** – An alternative json module to use for encoding and decoding packets. Custom json modules must have `dumps` and `loads` functions that are compatible with the standard library versions. To use the same json encoder and decoder as a Flask application, use `flask.json`.
 
-The Engine.IO server configuration supports the following settings:
+	The Engine.IO server configuration supports the following settings:
 
-| ----- |
-| Parameters: | 
+	**Parameters:**
 
-* **async_mode** – The asynchronous model to use. See the Deployment section in the documentation for a description of the available options. Valid async modes are `threading`, `eventlet`, `gevent` and `gevent_uwsgi`. If this argument is not given, `eventlet` is tried first, then `gevent_uwsgi`, then `gevent`, and finally `threading`. The first async mode that has all its dependencies installed is then one that is chosen.
-* **ping_timeout** – The time in seconds that the client waits for the server to respond before disconnecting. The default is 60 seconds.
-* **ping_interval** – The interval in seconds at which the client pings the server. The default is 25 seconds.
-* **max_http_buffer_size** – The maximum size of a message when using the polling transport. The default is 100,000,000 bytes.
-* **allow_upgrades** – Whether to allow transport upgrades or not. The default is `True`.
-* **http_compression** – Whether to compress packages when using the polling transport. The default is `True`.
-* **compression_threshold** – Only compress messages when their byte size is greater than this value. The default is 1024 bytes.
-* **cookie** – Name of the HTTP cookie that contains the client session id. If set to `None`, a cookie is not sent to the client. The default is `'io'`.
-* **cors_allowed_origins** – List of origins that are allowed to connect to this server. All origins are allowed by default.
-* **cors_credentials** – Whether credentials (cookies, authentication) are allowed in requests to this server. The default is `True`.
-* **engineio_logger** – To enable Engine.IO logging set to `True` or pass a logger object to use. To disable logging set to `False`. The default is `False`.
- | 
+	* **async_mode** – The asynchronous model to use. See the Deployment section in the documentation for a description of the available options. Valid async modes are `threading`, `eventlet`, `gevent` and `gevent_uwsgi`. If this argument is not given, `eventlet` is tried first, then `gevent_uwsgi`, then `gevent`, and finally `threading`. The first async mode that has all its dependencies installed is then one that is chosen.
+	* **ping_timeout** – The time in seconds that the client waits for the server to respond before disconnecting. The default is 60 seconds.
+	* **ping_interval** – The interval in seconds at which the client pings the server. The default is 25 seconds.
+	* **max_http_buffer_size** – The maximum size of a message when using the polling transport. The default is 100,000,000 bytes.
+	* **allow_upgrades** – Whether to allow transport upgrades or not. The default is `True`.
+	* **http_compression** – Whether to compress packages when using the polling transport. The default is `True`.
+	* **compression_threshold** – Only compress messages when their byte size is greater than this value. The default is 1024 bytes.
+	* **cookie** – Name of the HTTP cookie that contains the client session id. If set to `None`, a cookie is not sent to the client. The default is `'io'`.
+	* **cors_allowed_origins** – List of origins that are allowed to connect to this server. All origins are allowed by default.
+	* **cors_credentials** – Whether credentials (cookies, authentication) are allowed in requests to this server. The default is `True`.
+	* **engineio_logger** – To enable Engine.IO logging set to `True` or pass a logger object to use. To disable logging set to `False`. The default is `False`.
 
-`on`(_message_, _namespace=None_)
-: 
+`**on**`(_message_, _namespace=None_)
 
 Decorator to register a SocketIO event handler.
 
@@ -606,15 +604,10 @@ This decorator must be applied to SocketIO event handlers. Example:
         print('received json: ' + str(json))
     
 
-| ----- |
-| Parameters: | 
+	**Parameters:**	* **message** – The name of the event. This is normally a user defined string, but a few event names are already defined. Use `'message'` to define a handler that takes a string payload, `'json'` to define a handler that takes a JSON blob payload, `'connect'` or `'disconnect'` to create handlers for connection and disconnection events.
+	* **namespace** – The namespace on which the handler is to be registered. Defaults to the global namespace.
 
-* **message** – The name of the event. This is normally a user defined string, but a few event names are already defined. Use `'message'` to define a handler that takes a string payload, `'json'` to define a handler that takes a JSON blob payload, `'connect'` or `'disconnect'` to create handlers for connection and disconnection events.
-* **namespace** – The namespace on which the handler is to be registered. Defaults to the global namespace.
- | 
-
-`on_error`(_namespace=None_)
-: 
+`**on_error**`(_namespace=None_)
 
 Decorator to define a custom error handler for SocketIO events.
 
@@ -626,11 +619,9 @@ This decorator can be applied to a function that acts as an error handler for a 
         print('An error has occurred: ' + str(e))
     
 
-| ----- |
-| Parameters: | **namespace** – The namespace for which to register the error handler. Defaults to the global namespace. | 
+	**Parameters:** **namespace** – The namespace for which to register the error handler. Defaults to the global namespace.
 
-`on_error_default`(_exception_handler_)
-: 
+`**on_error_default**`(_exception_handler_)
 
 Decorator to define a default error handler for SocketIO events.
 
@@ -642,7 +633,7 @@ This decorator can be applied to a function that acts as a default error handler
         print('An error has occurred: ' + str(e))
     
 
-`on_event`(_message_, _handler_, _namespace=None_)
+`**on_event**`(_message_, _handler_, _namespace=None_)
 : 
 
 Register a SocketIO event handler.
