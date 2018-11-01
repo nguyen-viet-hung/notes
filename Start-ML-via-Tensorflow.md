@@ -8,9 +8,9 @@
 
 Qua bài viết trước, chúng ta đã biết được đến sự tồn tại của một vài khái niệm cơ bản trong Machine Learning. Tiếp theo chúng ta sẽ đi sâu vào cách để giải những bài toán này. Cũng như mình đã nói trong bài viết trước. Machine Learning sử dụng rất nhiều đến kiến thức toán cũng như xác suất thống kê. Việc này làm cho việc tiếp cận với Machine Learning trở nên không được phổ thông. Chính vì vậy, mình muốn giới thiệu đến các bạn những bộ công cụ hỗ trợ việc thực hành Machine Learning. Mình không nói rằng toán trở nên bớt quan trọng nhưng theo quan điểm của mình, việc làm đơn giản hóa một vài phần để học từng bước từng bước một thì việc học sẽ trở nên bớt đau đớn hơn.
 
-Hiện tại với công việc của mình, vì lí do dân tộc mà người Nhật họ yêu cầu bắt buộc là phải dùng _Chainer[_[Official site]][1]. (_Hay ít nhất là công ty mình yêu cầu phải dùng_) Thư viện này có tốc độ training và predict khá nhanh. Hỗ trợ _graph_(Biểu đồ) rất trực quan. Tuy nhiên cấu trúc API cá nhân mình thấy là trúc trắc, cộng đồng nhỏ, hẹp lại thiên về hướng Nhật ngữ nên không phù hợp để làm giảm đau đớn trong quá trình học.
+Hiện tại với công việc của mình, vì lí do dân tộc mà người Nhật họ yêu cầu bắt buộc là phải dùng _Chainer_ [[Official site]][1]. (_Hay ít nhất là công ty mình yêu cầu phải dùng_) Thư viện này có tốc độ training và predict khá nhanh. Hỗ trợ _graph_ (Biểu đồ) rất trực quan. Tuy nhiên cấu trúc API cá nhân mình thấy là trúc trắc, cộng đồng nhỏ, hẹp lại thiên về hướng Nhật ngữ nên không phù hợp để làm giảm đau đớn trong quá trình học.
 
-Thư viện được mình lựa chọn là Tensorflow[[Official site]][2]. Đây là một thư viện có năng lực không hề thua kém Chainer, cấu trúc API rõ ràng hơn cộng với sử dụng rất nhiều kĩ thuật trong Machine Learning nên rất phù hợp trong quá trình học ở mức cơ bản.  
+Thư viện được mình lựa chọn là Tensorflow [[Official site]][2]. Đây là một thư viện có năng lực không hề thua kém Chainer, cấu trúc API rõ ràng hơn cộng với sử dụng rất nhiều kĩ thuật trong Machine Learning nên rất phù hợp trong quá trình học ở mức cơ bản.  
 Trong bài viết này sẽ giới thiệu Tensorflow là gì và thực hành một bài toán nhập môn với Tensorflow.
 
 ## Tensorflow là gì?
@@ -26,7 +26,7 @@ Hình 1.1: Ví dụ về một graph trong Tensorflow
 
 ### Khái niệm cơ bản trong Tensorflow
 
-Khi thực hành với Tensorflow, sẽ có rất nhiều khái niệm phức tạp. Tuy nhiên chỉ ở mức cơ bản, chúng ta sẽ đi đến khái niệm quan trọng nhất trong Tensorflow là **Tensor[**[Tensor]][4].
+Khi thực hành với Tensorflow, sẽ có rất nhiều khái niệm phức tạp. Tuy nhiên chỉ ở mức cơ bản, chúng ta sẽ đi đến khái niệm quan trọng nhất trong Tensorflow là **Tensor** [[Tensor]][4].
 
 #### Node
 
@@ -34,7 +34,7 @@ Vì Tensorflow mô tả lại dòng chảy của dữ liệu thông qua graph n�
 
 #### Tensor
 
-Như trong bài viết trước mình có đề cập, để giải được các bài toán Machine Learning, cần phải làm cho máy tính có thể hiểu được dữ liệu của tập nguồn và dữ liệu của tập đích. Tensorflow cung cấp một loại dữ liệu mới được gọi là _Tensor[_[Tenensorflow]][5]. Trong thế giới của Tensorflow, mọi kiểu dữ liệu đều được quy về một mối được gọi là Tensor hay trong Tensorflow, tất cả các loại dữ liệu đều là Tensor. Vậy nên có thể hiểu được phần nào cái tên Tensorflow là một thư viện mô tả, điều chỉnh dòng chảy của các Tensor.
+Như trong bài viết trước mình có đề cập, để giải được các bài toán Machine Learning, cần phải làm cho máy tính có thể hiểu được dữ liệu của tập nguồn và dữ liệu của tập đích. Tensorflow cung cấp một loại dữ liệu mới được gọi là _Tensor_ [[Tenensorflow]][5]. Trong thế giới của Tensorflow, mọi kiểu dữ liệu đều được quy về một mối được gọi là Tensor hay trong Tensorflow, tất cả các loại dữ liệu đều là Tensor. Vậy nên có thể hiểu được phần nào cái tên Tensorflow là một thư viện mô tả, điều chỉnh dòng chảy của các Tensor.
 
 Tensor là một kiểu dữ liệu dạng mảng có nhiều chiều được mô tả dạng `Tensor = [[[1,1,1],[178,62,74]],[[45,2,2],[19,0,17]],[[7,5,2],[0,11,4]],[[8,13,5],[1,6,7]]]`. Mảng nhiều chiều này được đính kèm thêm một vài thuộc tính tham chiếu khác. Các thuộc tính của Tensor được mô tả trong tài liệu bao gồm:
 
@@ -50,7 +50,7 @@ Tensor là một kiểu dữ liệu dạng mảng có nhiều chiều được m
 Rank là bậc hay độ sâu của một Tensor. Ví dụ như `Tensor = [1]` sẽ có rank là 1, `Tensor = [[[1,1,1],[178,62,74]]]` sẽ có rank bằng 3, `Tensor = [[1,1,1],[178,62,74]]` sẽ có rank bằng 2. Cách nhanh nhất để xác định rank của một Tensor là đếm số lần mở ngoặc vuông cho đến giá trị khác ngoặc vuông đầu tiên. Việc phân rank này khá quan trọng vì nó đồng thời cũng giúp phân loại dữ liệu của Tensor. Khi ở cách rank đặc biệt cụ thể, Tensor có những tên gọi riêng như sau:
 
 * **Scalar**: Khi Tensor có rank bằng 0, Tensor đại diện cho một số hoặc một chuỗi cụ thể. Ví dụ: `scalar=123`.
-* **Vector**: Vector là một Tensor rank 1. Trong python thì Vector là một _list hay mảng một chiều[_[Pyton]][6] chứa các số. Ví dụ: `list=[123,345]`.
+* **Vector**: Vector là một Tensor rank 1. Trong python thì Vector là một _list hay mảng một chiều_ [[Pyton]][6] chứa các số. Ví dụ: `list=[123,345]`.
 * **Matrix**: Đây là một Tensor rank 2 hay mảng hai chiều theo khái niệm của Python. Ví dụ: `matrix=[[1,2],[2,1]]`.
 * **N-Tensor**: Khi rank của Tensor tăng lên lớn hơn 2, chúng được gọi chung là N-Tensor.
 
@@ -61,7 +61,7 @@ Hình 1.2: Ví dụ minh họa về Tensor
 
 ##### Shape
 
-Shape là một tuple[[Python]][8] có _dimention_(Số chiều) bằng với rank của Tensor tương ứng dùng để mô tả lại cấu trúc của Tensor đó. Dưới đây là ví dụ về Shape.
+Shape là một tuple[[Python]][8] có _dimention_ (Số chiều) bằng với rank của Tensor tương ứng dùng để mô tả lại cấu trúc của Tensor đó. Dưới đây là ví dụ về Shape.
 
 * `Tensor = 1` sẽ có `Shape = ()`.
 * `Tensor = [1]` sẽ có `Shape = (1)`.
@@ -97,7 +97,7 @@ Hình 1.3: Báo lỗi của Tensorflow khi khai báo một Tensor không hợp l
 
 ##### Op
 
-Được viết tắt là op, khái niệm Operator là toán tử được dùng để thực thi Tensor tại node đó. Các toán tử này có thể là **_Const_**(Hằng số), **_Variable_**(Biến số), **_Add_**(Phép cộng), **_Mul_**(Phép nhân)... Đôi khi mình cảm thấy việc dịch là toán tử cũng không hợp lí bởi lẽ các toán tử này đôi khi lại mô tả Node là Constant hay Variable. Có thể nói, khái niệm operator trong Tensorflow là khái niệm dùng để mô tả lại trạng thái của Node nói chung.
+Được viết tắt là op, khái niệm Operator là toán tử được dùng để thực thi Tensor tại node đó. Các toán tử này có thể là **_Const_** (Hằng số), **_Variable_** (Biến số), **_Add_** (Phép cộng), **_Mul_** (Phép nhân)... Đôi khi mình cảm thấy việc dịch là toán tử cũng không hợp lí bởi lẽ các toán tử này đôi khi lại mô tả Node là Constant hay Variable. Có thể nói, khái niệm operator trong Tensorflow là khái niệm dùng để mô tả lại trạng thái của Node nói chung.
 
 ##### DType
 
@@ -109,7 +109,7 @@ Phần quan trọng tiếp theo là bạn ít ra cũng phải thực hành đư�
 
 ### Hello world
 
-Như đã quen thuộc với tất cả mọi lập trình viên trên thế giới. Bài toán Hellowork là bài toán đơn giản nhất nhằm chỉ ra cách cài đặt và chạy thử nghiệm một chương trình hoặc thuật toán bất kì. Để [install][11] được Tensorflow, thư viện đòi hỏi ta phải thực hiện vô cùng nhiều bước cài đặt nên cách mình lựa chọn là sử dụng **Docker[**[Kipalog]][12]. Docker sẽ cung cấp cho ta một máy ảo (Hiện tại máy ảo của Docker chỉ hỗ trợ Linux) có thiết lập sẵn môi trường làm việc cần thiết cho một dự án phát triển nào đó.
+Như đã quen thuộc với tất cả mọi lập trình viên trên thế giới. Bài toán Hellowork là bài toán đơn giản nhất nhằm chỉ ra cách cài đặt và chạy thử nghiệm một chương trình hoặc thuật toán bất kì. Để [install][11] được Tensorflow, thư viện đòi hỏi ta phải thực hiện vô cùng nhiều bước cài đặt nên cách mình lựa chọn là sử dụng **Docker** [[Kipalog]][12]. Docker sẽ cung cấp cho ta một máy ảo (Hiện tại máy ảo của Docker chỉ hỗ trợ Linux) có thiết lập sẵn môi trường làm việc cần thiết cho một dự án phát triển nào đó.
 
 Thiết bị mình dùng là một con Workstion cài Ubuntu. Mình sử dụng câu lệnh sau để thiết lập môi trường cho Docker.
     
@@ -136,7 +136,7 @@ Mình chạy tiếp lệnh `python` để khởi động python ở _scritp mode
     >>>
     
 
-Vì Tensorflow không phải là thư viện mặc định của python nên để sử dụng được ta luôn phải import trước khi dùng. Tuy nhiên là mình thấy chữ Tensorflow khá dài và tốn nhiều không gian lệnh. Vậy nên mình _alias_(Ánh xạ) nó thành `tf` để tiện dùng trong tương lai.
+Vì Tensorflow không phải là thư viện mặc định của python nên để sử dụng được ta luôn phải import trước khi dùng. Tuy nhiên là mình thấy chữ Tensorflow khá dài và tốn nhiều không gian lệnh. Vậy nên mình _alias_ (Ánh xạ) nó thành `tf` để tiện dùng trong tương lai.
     
     
     >>> import tensorflow as tf
@@ -155,7 +155,7 @@ Node này có tên là `hello`, Operator là `constant`, DType là `tf.string`, 
     
     
 
-Quá đã, mình đã từng thích Python rất nhiều vì điều này. Ta có thể nhận thấy Operator được thiết lập cho Node bởi _method_(Phương thức)`constant()`. Vì dữ liệu được truyền vào có kiểu chuỗi nên DType được chuyển một cách tự động. Đây là một Scalar Node nên có `rank=0` đương nhiên `shape=()`. Tuy nhiên Node `hello` mặc dù đã xuất hiện thần kì trên đồ thị nhưng chẳng thể làm gì được cả. Hãy tưởng tượng ở thế giới nhân sinh của chúng ta, máy móc thì làm sao mà học được. Trong Tensorflow có một cõi thần tiên, nơi mà đã được triển khai hết các thuật toán Machine Learning cần thiết để train cho máy tính. Ta chỉ có thể liên kết đến nơi đó thông qua một ông thầy cúng gọi là _Session_(Phiên)[[Tensorflow]][13]. Session sẽ có nhiệm vụ giao tiếp với các vị thần tiên tục gọi là Worker để thực thi các hoạt động mong muốn của ta.
+Quá đã, mình đã từng thích Python rất nhiều vì điều này. Ta có thể nhận thấy Operator được thiết lập cho Node bởi _method_(Phương thức)`constant()`. Vì dữ liệu được truyền vào có kiểu chuỗi nên DType được chuyển một cách tự động. Đây là một Scalar Node nên có `rank=0` đương nhiên `shape=()`. Tuy nhiên Node `hello` mặc dù đã xuất hiện thần kì trên đồ thị nhưng chẳng thể làm gì được cả. Hãy tưởng tượng ở thế giới nhân sinh của chúng ta, máy móc thì làm sao mà học được. Trong Tensorflow có một cõi thần tiên, nơi mà đã được triển khai hết các thuật toán Machine Learning cần thiết để train cho máy tính. Ta chỉ có thể liên kết đến nơi đó thông qua một ông thầy cúng gọi là _Session_ (Phiên)[[Tensorflow]][13]. Session sẽ có nhiệm vụ giao tiếp với các vị thần tiên tục gọi là Worker để thực thi các hoạt động mong muốn của ta.
     
     
     >>> sess = tf.Session()
@@ -229,7 +229,7 @@ Suy nghĩ một chút về bài toán, đồ thị mong muốn của chúng ta l
     >>> adder_node = a + b  # + provides a shortcut for tf.add(a, b)
     
 
-Khi một Node có Operator là `placeholder`, chúng không cần giá trị cụ thể mà chỉ yêu cầu một kiểu DType đặt trước. Giá trị của Node sẽ được xác định mỗi lần Worker chạy qua chúng thông qua một tập dữ liệu kiểu _Dictionaries_(Kiểu dữ liệu từ điển)[[Python]][15]
+Khi một Node có Operator là `placeholder`, chúng không cần giá trị cụ thể mà chỉ yêu cầu một kiểu DType đặt trước. Giá trị của Node sẽ được xác định mỗi lần Worker chạy qua chúng thông qua một tập dữ liệu kiểu _Dictionaries_ (Kiểu dữ liệu từ điển)[[Python]][15]
     
     
     >>> print(sess.run(adder_node, {a: 3, b:4.5}))
@@ -260,7 +260,7 @@ Vậy là xong, Model của chúng ta cần làm sẽ có dạng.
     >>> y = tf.placeholder(tf.float32)
     
 
-Quên công thức bên trên ngay và luôn. Vì `W` và `b` là hai constant nên dẫn đến việc khi chúng ta cần phải thay đổi hai giá trị này để tạo ra Model mới, ta sẽ phải tạo ra hai biến mới thật phiền. Tensorflow cung cấp một Operator là _Variable_(Biến số).
+Quên công thức bên trên ngay và luôn. Vì `W` và `b` là hai constant nên dẫn đến việc khi chúng ta cần phải thay đổi hai giá trị này để tạo ra Model mới, ta sẽ phải tạo ra hai biến mới thật phiền. Tensorflow cung cấp một Operator là _Variable_ (Biến số).
     
     
     >>> W = tf.Variable([.3], dtype=tf.float32)
