@@ -1,3 +1,3 @@
 # NOTES
 
-This is the place for storing everything about building any libraries tricks
+This is the place for storing everything includes building any libraries tricks
