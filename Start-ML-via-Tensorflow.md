@@ -21,12 +21,12 @@ Theo định nghĩa của Google thì:
 
 Quá dài và quá khó hiểu. Nếu hiểu theo cách của mình thì Tensorflow là một thư viện mã nguồn mở cung cấp khả năng xử lí tính toán số học dựa trên biểu đồ mô tả sự thay đổi của dữ liệu. Tensor được sử dụng khi bạn cần giải quyết các bài toán supervised learning.
 
-![Hình 1.1: Ví dụ về một graph trong Tensorflow][3]  
+![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/i1ucnftq6_image.png)  
 Hình 1.1: Ví dụ về một graph trong Tensorflow
 
 ### Khái niệm cơ bản trong Tensorflow
 
-Khi thực hành với Tensorflow, sẽ có rất nhiều khái niệm phức tạp. Tuy nhiên chỉ ở mức cơ bản, chúng ta sẽ đi đến khái niệm quan trọng nhất trong Tensorflow là **Tensor** [[Tensor]][4].
+Khi thực hành với Tensorflow, sẽ có rất nhiều khái niệm phức tạp. Tuy nhiên chỉ ở mức cơ bản, chúng ta sẽ đi đến khái niệm quan trọng nhất trong Tensorflow là **Tensor** [[Tensor]][3].
 
 #### Node
 
@@ -34,7 +34,7 @@ Vì Tensorflow mô tả lại dòng chảy của dữ liệu thông qua graph n�
 
 #### Tensor
 
-Như trong bài viết trước mình có đề cập, để giải được các bài toán Machine Learning, cần phải làm cho máy tính có thể hiểu được dữ liệu của tập nguồn và dữ liệu của tập đích. Tensorflow cung cấp một loại dữ liệu mới được gọi là _Tensor_ [[Tenensorflow]][5]. Trong thế giới của Tensorflow, mọi kiểu dữ liệu đều được quy về một mối được gọi là Tensor hay trong Tensorflow, tất cả các loại dữ liệu đều là Tensor. Vậy nên có thể hiểu được phần nào cái tên Tensorflow là một thư viện mô tả, điều chỉnh dòng chảy của các Tensor.
+Như trong bài viết trước mình có đề cập, để giải được các bài toán Machine Learning, cần phải làm cho máy tính có thể hiểu được dữ liệu của tập nguồn và dữ liệu của tập đích. Tensorflow cung cấp một loại dữ liệu mới được gọi là _Tensor_ [[Tenensorflow]][4]. Trong thế giới của Tensorflow, mọi kiểu dữ liệu đều được quy về một mối được gọi là Tensor hay trong Tensorflow, tất cả các loại dữ liệu đều là Tensor. Vậy nên có thể hiểu được phần nào cái tên Tensorflow là một thư viện mô tả, điều chỉnh dòng chảy của các Tensor.
 
 Tensor là một kiểu dữ liệu dạng mảng có nhiều chiều được mô tả dạng `Tensor = [[[1,1,1],[178,62,74]],[[45,2,2],[19,0,17]],[[7,5,2],[0,11,4]],[[8,13,5],[1,6,7]]]`. Mảng nhiều chiều này được đính kèm thêm một vài thuộc tính tham chiếu khác. Các thuộc tính của Tensor được mô tả trong tài liệu bao gồm:
 
@@ -50,18 +50,18 @@ Tensor là một kiểu dữ liệu dạng mảng có nhiều chiều được m
 Rank là bậc hay độ sâu của một Tensor. Ví dụ như `Tensor = [1]` sẽ có rank là 1, `Tensor = [[[1,1,1],[178,62,74]]]` sẽ có rank bằng 3, `Tensor = [[1,1,1],[178,62,74]]` sẽ có rank bằng 2. Cách nhanh nhất để xác định rank của một Tensor là đếm số lần mở ngoặc vuông cho đến giá trị khác ngoặc vuông đầu tiên. Việc phân rank này khá quan trọng vì nó đồng thời cũng giúp phân loại dữ liệu của Tensor. Khi ở cách rank đặc biệt cụ thể, Tensor có những tên gọi riêng như sau:
 
 * **Scalar**: Khi Tensor có rank bằng 0, Tensor đại diện cho một số hoặc một chuỗi cụ thể. Ví dụ: `scalar=123`.
-* **Vector**: Vector là một Tensor rank 1. Trong python thì Vector là một _list hay mảng một chiều_ [[Pyton]][6] chứa các số. Ví dụ: `list=[123,345]`.
+* **Vector**: Vector là một Tensor rank 1. Trong python thì Vector là một _list hay mảng một chiều_ [[Pyton]][5] chứa các số. Ví dụ: `list=[123,345]`.
 * **Matrix**: Đây là một Tensor rank 2 hay mảng hai chiều theo khái niệm của Python. Ví dụ: `matrix=[[1,2],[2,1]]`.
 * **N-Tensor**: Khi rank của Tensor tăng lên lớn hơn 2, chúng được gọi chung là N-Tensor.
 
-![Hình 1.2: Ví dụ minh họa về Tensor][7]  
+![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/nqj1uqylgd_image.png)  
 Hình 1.2: Ví dụ minh họa về Tensor
 
 ###### Lưu ý: Khái niệm về chiều trong Tensorflow và Python có sự sai khác lẫn nhau. Chiều trong python chính là bậc trong Tensorflow. Chiều trong Tensorflow là số lượng elements có trong bậc cuối cùng của Tensor tương ứng. Ví dụ `Tensor = [[[1,1,1],[178,62,74]]]` có chiều bằng 3, `Tensor = [[1,1,1],[178,62,74]]` vẫn có chiều bằng 3.
 
 ##### Shape
 
-Shape là một tuple[[Python]][8] có _dimention_ (Số chiều) bằng với rank của Tensor tương ứng dùng để mô tả lại cấu trúc của Tensor đó. Dưới đây là ví dụ về Shape.
+Shape là một tuple[[Python]][6] có _dimention_ (Số chiều) bằng với rank của Tensor tương ứng dùng để mô tả lại cấu trúc của Tensor đó. Dưới đây là ví dụ về Shape.
 
 * `Tensor = 1` sẽ có `Shape = ()`.
 * `Tensor = [1]` sẽ có `Shape = (1)`.
@@ -92,7 +92,7 @@ Dựa vào cấu trúc của Shape, ta dễ dàng thấy rằng ràng buộc cơ
     
     
 
-![Hình 1.3: Báo lỗi của Tensorflow khi khai báo một Tensor không hợp lệ][9]  
+![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/eqlrr6pxtx_image.png)  
 Hình 1.3: Báo lỗi của Tensorflow khi khai báo một Tensor không hợp lệ
 
 ##### Op
@@ -101,7 +101,7 @@ Hình 1.3: Báo lỗi của Tensorflow khi khai báo một Tensor không hợp l
 
 ##### DType
 
-Đây là kiểu dữ liệu của các elements trong Tensor. Vì một Tensor chỉ có duy nhất một thuộc tính DType nên từ đó cũng suy ra là chỉ có duy nhất một kiểu DType duy nhất cho toàn bộ các elements có trong Tensor hiện tại. Bảng danh sách các Dtype khả dụng tra cứu [tại đây][10]. Việc tạo ra hơn một DType khác nhau cho các elements của Tensor là không khả dụng. Hiện có hack hay trick nào chưa thì mình chưa rõ nhưng kể cả khi bạn thực hiện các phép toán thì cũng không thể làm điều đó được.
+Đây là kiểu dữ liệu của các elements trong Tensor. Vì một Tensor chỉ có duy nhất một thuộc tính DType nên từ đó cũng suy ra là chỉ có duy nhất một kiểu DType duy nhất cho toàn bộ các elements có trong Tensor hiện tại. Bảng danh sách các Dtype khả dụng tra cứu [tại đây][7]. Việc tạo ra hơn một DType khác nhau cho các elements của Tensor là không khả dụng. Hiện có hack hay trick nào chưa thì mình chưa rõ nhưng kể cả khi bạn thực hiện các phép toán thì cũng không thể làm điều đó được.
 
 ## Hello world với Tensorflow
 
@@ -109,7 +109,7 @@ Phần quan trọng tiếp theo là bạn ít ra cũng phải thực hành đư�
 
 ### Hello world
 
-Như đã quen thuộc với tất cả mọi lập trình viên trên thế giới. Bài toán Hellowork là bài toán đơn giản nhất nhằm chỉ ra cách cài đặt và chạy thử nghiệm một chương trình hoặc thuật toán bất kì. Để [install][11] được Tensorflow, thư viện đòi hỏi ta phải thực hiện vô cùng nhiều bước cài đặt nên cách mình lựa chọn là sử dụng **Docker** [[Kipalog]][12]. Docker sẽ cung cấp cho ta một máy ảo (Hiện tại máy ảo của Docker chỉ hỗ trợ Linux) có thiết lập sẵn môi trường làm việc cần thiết cho một dự án phát triển nào đó.
+Như đã quen thuộc với tất cả mọi lập trình viên trên thế giới. Bài toán Hellowork là bài toán đơn giản nhất nhằm chỉ ra cách cài đặt và chạy thử nghiệm một chương trình hoặc thuật toán bất kì. Để [install][8] được Tensorflow, thư viện đòi hỏi ta phải thực hiện vô cùng nhiều bước cài đặt nên cách mình lựa chọn là sử dụng **Docker** [[Kipalog]][9]. Docker sẽ cung cấp cho ta một máy ảo (Hiện tại máy ảo của Docker chỉ hỗ trợ Linux) có thiết lập sẵn môi trường làm việc cần thiết cho một dự án phát triển nào đó.
 
 Thiết bị mình dùng là một con Workstion cài Ubuntu. Mình sử dụng câu lệnh sau để thiết lập môi trường cho Docker.
     
@@ -155,7 +155,7 @@ Node này có tên là `hello`, Operator là `constant`, DType là `tf.string`, 
     
     
 
-Quá đã, mình đã từng thích Python rất nhiều vì điều này. Ta có thể nhận thấy Operator được thiết lập cho Node bởi _method_(Phương thức)`constant()`. Vì dữ liệu được truyền vào có kiểu chuỗi nên DType được chuyển một cách tự động. Đây là một Scalar Node nên có `rank=0` đương nhiên `shape=()`. Tuy nhiên Node `hello` mặc dù đã xuất hiện thần kì trên đồ thị nhưng chẳng thể làm gì được cả. Hãy tưởng tượng ở thế giới nhân sinh của chúng ta, máy móc thì làm sao mà học được. Trong Tensorflow có một cõi thần tiên, nơi mà đã được triển khai hết các thuật toán Machine Learning cần thiết để train cho máy tính. Ta chỉ có thể liên kết đến nơi đó thông qua một ông thầy cúng gọi là _Session_ (Phiên)[[Tensorflow]][13]. Session sẽ có nhiệm vụ giao tiếp với các vị thần tiên tục gọi là Worker để thực thi các hoạt động mong muốn của ta.
+Quá đã, mình đã từng thích Python rất nhiều vì điều này. Ta có thể nhận thấy Operator được thiết lập cho Node bởi _method_(Phương thức)`constant()`. Vì dữ liệu được truyền vào có kiểu chuỗi nên DType được chuyển một cách tự động. Đây là một Scalar Node nên có `rank=0` đương nhiên `shape=()`. Tuy nhiên Node `hello` mặc dù đã xuất hiện thần kì trên đồ thị nhưng chẳng thể làm gì được cả. Hãy tưởng tượng ở thế giới nhân sinh của chúng ta, máy móc thì làm sao mà học được. Trong Tensorflow có một cõi thần tiên, nơi mà đã được triển khai hết các thuật toán Machine Learning cần thiết để train cho máy tính. Ta chỉ có thể liên kết đến nơi đó thông qua một ông thầy cúng gọi là _Session_ (Phiên)[[Tensorflow]][10]. Session sẽ có nhiệm vụ giao tiếp với các vị thần tiên tục gọi là Worker để thực thi các hoạt động mong muốn của ta.
     
     
     >>> sess = tf.Session()
@@ -215,8 +215,9 @@ Node mới hiện tại đã có Operator là `Add`. Cách thức hoạt động
     sess.run(node3):  7.0
     
 
-Trong TensorBoard, graph sẽ thể hiện như sau.  
-![Hình 2.1: Đồ thị của phép add hai constant][14]  
+Trong TensorBoard, graph sẽ thể hiện như sau.
+
+![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/n2ux2com3j_image.png)  
 _Hình 2.1: Đồ thị của phép add hai constant_
 
 ##### Placeholder
@@ -229,7 +230,7 @@ Suy nghĩ một chút về bài toán, đồ thị mong muốn của chúng ta l
     >>> adder_node = a + b  # + provides a shortcut for tf.add(a, b)
     
 
-Khi một Node có Operator là `placeholder`, chúng không cần giá trị cụ thể mà chỉ yêu cầu một kiểu DType đặt trước. Giá trị của Node sẽ được xác định mỗi lần Worker chạy qua chúng thông qua một tập dữ liệu kiểu _Dictionaries_ (Kiểu dữ liệu từ điển)[[Python]][15]
+Khi một Node có Operator là `placeholder`, chúng không cần giá trị cụ thể mà chỉ yêu cầu một kiểu DType đặt trước. Giá trị của Node sẽ được xác định mỗi lần Worker chạy qua chúng thông qua một tập dữ liệu kiểu _Dictionaries_ (Kiểu dữ liệu từ điển)[[Python]][11]
     
     
     >>> print(sess.run(adder_node, {a: 3, b:4.5}))
@@ -239,7 +240,7 @@ Khi một Node có Operator là `placeholder`, chúng không cần giá trị c�
     
 
 Trong TensorBoard, graph sẽ được thể hiện như sau.  
-![Hình 2.2: Đồ thị của phép add hai placeholder][16]  
+![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/o4yu2rfk24_image.png)  
 _Hình 2.2: Đồ thị của phép add hai placeholder_  
 Đồng thời cũng có thể dễ dàng tạo ra một phép toán kết hợp Node như sau.
     
@@ -367,7 +368,7 @@ Vì bản thân training method không biết được giá trị như thế nà
     W: [-0.9999969] b: [ 0.99999082] loss: 5.69997e-11
     
 
-Ta có thể thấy là giá trị loss lúc này rơi vào khoảng `5 x 10^-11` là một khoảng rất rất nhỏ. Nếu ta tiếp tục train, giá trị sẽ giảm xuống nữa nhưng không bao giờ về 0 được vì Lim đang tiến tới vô cùng. Ok vậy là ta đã đi qua một bài toán Machine Learning dạng Regression. Nếu dùng thư viện thì việc thực hàng Machine Learning trở nên rất là đơn giản đúng không? Tuy nhiên nếu không có kiến thức căn bản về Machine Learning, ta cũng không thể biết được rằng mình nên làm gì với cái thư viện này. Đây là toàn bộ lời giản cho bài toán mẫu. Lời giải tối ưu hơn có thể [tham khảo tại đây][17].
+Ta có thể thấy là giá trị loss lúc này rơi vào khoảng `5 x 10^-11` là một khoảng rất rất nhỏ. Nếu ta tiếp tục train, giá trị sẽ giảm xuống nữa nhưng không bao giờ về 0 được vì Lim đang tiến tới vô cùng. Ok vậy là ta đã đi qua một bài toán Machine Learning dạng Regression. Nếu dùng thư viện thì việc thực hàng Machine Learning trở nên rất là đơn giản đúng không? Tuy nhiên nếu không có kiến thức căn bản về Machine Learning, ta cũng không thể biết được rằng mình nên làm gì với cái thư viện này. Đây là toàn bộ lời giản cho bài toán mẫu. Lời giải tối ưu hơn có thể [tham khảo tại đây][12].
 
 #### Bài toán đầy đủ
     
@@ -401,7 +402,7 @@ Ta có thể thấy là giá trị loss lúc này rơi vào khoảng `5 x 10^-11
     >>> print("W: %s b: %s loss: %s"%(curr_W, curr_b, curr_loss))
     
 
-![Hình 2.3: Đồ thị của toàn bộ bài toán][18]  
+![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/2r4jrv9bzo_image.png)  
 _Hình 2.3: Đồ thị của toàn bộ bài toán_
 
 Bài toán của chúng ta không bao giờ đơn giản và êm ả với chỉ một Model dạng linear. Model không chỉ tự thay đổi giá trị bản thân chúng để học mà còn thay đổi cả dạng của chúng nữa. Điều này dẫn đến Model phải có khả năng tự chuyển đổi nhờ vào một API gọi là `tf.contrib.learn`  
@@ -409,22 +410,16 @@ Bài toán của chúng ta không bao giờ đơn giản và êm ả với chỉ
 
 [1]: https://chainer.org/
 [2]: https://www.tensorflow.org/
-[3]: https://s3-ap-southeast-1.amazonaws.com/kipalog.com/i1ucnftq6_image.png
-[4]: https://kipalog.com#tensor
-[5]: https://www.tensorflow.org/api_docs/python/tf/Tensor
-[6]: https://docs.python.org/2/tutorial/datastructures.html#more-on-lists
-[7]: https://s3-ap-southeast-1.amazonaws.com/kipalog.com/nqj1uqylgd_image.png
-[8]: https://docs.python.org/2/tutorial/datastructures.html#tuples-and-sequences
-[9]: https://s3-ap-southeast-1.amazonaws.com/kipalog.com/eqlrr6pxtx_image.png
-[10]: https://www.tensorflow.org/api_docs/python/tf/DType
-[11]: https://www.tensorflow.org/install/
-[12]: https://kipalog.com/posts/Toi-da-dung-Docker-nhu-the-nao
-[13]: https://www.tensorflow.org/api_docs/python/tf/Session
-[14]: https://s3-ap-southeast-1.amazonaws.com/kipalog.com/n2ux2com3j_image.png
-[15]: https://docs.python.org/2/tutorial/datastructures.html#dictionaries
-[16]: https://s3-ap-southeast-1.amazonaws.com/kipalog.com/o4yu2rfk24_image.png
-[17]: https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/linear_regression.py
-[18]: https://s3-ap-southeast-1.amazonaws.com/kipalog.com/2r4jrv9bzo_image.png
+[3]: https://kipalog.com#tensor
+[4]: https://www.tensorflow.org/api_docs/python/tf/Tensor
+[5]: https://docs.python.org/2/tutorial/datastructures.html#more-on-lists
+[6]: https://docs.python.org/2/tutorial/datastructures.html#tuples-and-sequences
+[7]: https://www.tensorflow.org/api_docs/python/tf/DType
+[8]: https://www.tensorflow.org/install/
+[9]: https://kipalog.com/posts/Toi-da-dung-Docker-nhu-the-nao
+[10]: https://www.tensorflow.org/api_docs/python/tf/Session
+[11]: https://docs.python.org/2/tutorial/datastructures.html#dictionaries
+[12]: https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/linear_regression.py
 
   
 
