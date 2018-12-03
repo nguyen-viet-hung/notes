@@ -98,13 +98,13 @@ MySQL is a relational database management system (RDBMS) that runs as a server p
 ### 5\. Get Your Generated Random root Password
     
     
-    grep 'A temporary password is generated for [[email protected]][3]' /var/log/mysqld.log |tail -1
+    grep 'A temporary password is generated for root@localhost' /var/log/mysqld.log |tail -1
     
 
 Example Output:
     
     
-    2015-11-20T21:11:44.229891Z 1 [Note] A temporary password is generated for [[email protected]][3]: -et)QoL4MLid
+    2015-11-20T21:11:44.229891Z 1 [Note] A temporary password is generated for root@localhost: -et)QoL4MLid
     
 
 And root password is: **-et)QoL4MLid**
@@ -291,7 +291,6 @@ Output:
 
 [1]: https://media.if-not-true-then-false.com/2010/07/mysql-logo.png "MySQL Logo"
 [2]: https://www.if-not-true-then-false.com/2013/install-mariadb-on-fedora-centos-rhel/
-[3]: https://www.if-not-true-then-false.com/cdn-cgi/l/email-protection
 
   
 
