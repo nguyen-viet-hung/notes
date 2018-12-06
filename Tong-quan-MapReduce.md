@@ -36,15 +36,15 @@ Các job sau dễ dàng sử dụng Mapreduce:
     * Đưa ra kết quả cuối cùng.
 ## Sơ đồ:
 
-    ![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/m%C3%B4%20h%C3%ACnh%20ho%E1%BA%A1t%20%C4%91%E1%BB%99ng.png)
+![](resouces/images/Tong-quan-MapReduce/mo_hinh_hoat_dong.png)
 
 * Ví dụ với bài toán wordcount
 
-    ![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/wordcount.png)
+![](resouces/images/Tong-quan-MapReduce/wordcount.png)
 
 ## Implementation
 
-![](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/ExecuteOverview.png)
+![](resouces/images/Tong-quan-MapReduce/ExecuteOverview.png)
 
 1. Thông qua thư viện MapReduce ứng dụng với từng ngôn ngữ, chương trình có nhiệm vụ phân mảnh tệp dữ liệu đầu vào. Dữ liệu vào được chia thành các phần nhỏ 16 megabytes đến 64 megabytes (MB). Sau đó khởi động việc sao chép chương trình trên các clusters.
 1. Các máy gồm có: master và worker. Trong đó máy master làm nhiệm vụ điều phối sự hoạt động của quá trình thực hiện MapReduce trên các máy worker, các máy worker làm nhiệm vụ thực hiện Map và Reduce với dữ liệu mà nó nhận được. Bằng cách đặt trạng thái idle máy workers và sau đó gắn cho từng máy task map hoặc reduce.
